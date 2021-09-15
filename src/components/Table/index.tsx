@@ -6,15 +6,16 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 
+import TextFilter from '../../components/TextFilter';
+
 import { useTable, useSortBy, useFilters } from 'react-table';
 
 interface TableProps {
     columns: any;
     data: any;
-    filter: any;
 }
 
-const Table: React.FC<TableProps> = ({ columns, data, filter }) => {
+const Table: React.FC<TableProps> = ({ columns, data }) => {
     const {
         getTableProps,
         headerGroups,
@@ -23,7 +24,6 @@ const Table: React.FC<TableProps> = ({ columns, data, filter }) => {
     } = useTable({
         columns,
         data,
-        filter,
     }, useFilters, useSortBy);
 
     return (
@@ -37,6 +37,9 @@ const Table: React.FC<TableProps> = ({ columns, data, filter }) => {
                                 <span>
                                     {column.isSorted ? (column.isSortedDesc ? ' 🔽' : ' 🔼') : ''}
                                 </span>
+                                <div>
+                                    {column.canFilter ? <TextFilter column={column} /> : null}
+                                </div>
                             </TableCell>
                         ))}
                     </TableRow>

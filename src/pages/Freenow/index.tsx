@@ -14,7 +14,6 @@ import {
 import '@natscale/react-calendar/dist/main.css';
 import { Calendar } from '@natscale/react-calendar';
 import Table from '../../components/Table';
-import TextFilter from '../../components/TextFilter';
 import { Styles } from '../../components/Table/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
@@ -97,13 +96,6 @@ const Freenow: React.FC = () => {
         []
     );
 
-    const defaultColumn = React.useMemo(
-        () => ({
-            Filter: TextFilter,
-        }),
-        []
-    );
-
     const [value, setValue] = useState();
 
     const onChange = useCallback(
@@ -135,7 +127,7 @@ const Freenow: React.FC = () => {
             </DateForm>
             <CssBaseline />
             <Styles>
-                <Table columns={columns} data={data} filter={defaultColumn} />
+                <Table columns={columns} data={data} />
             </Styles>
         </>
     );
