@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import logoImg from '../../assets/freenow.jpg';
 import { FiChevronLeft } from 'react-icons/fi';
 
+import api from '../../services/api';
+
 import {
     Title,
     Header,
@@ -17,90 +19,102 @@ import Table from '../../components/Table';
 import { Styles } from '../../components/Table/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
-const Freenow: React.FC = () => {
-    const data = useMemo(() =>
-        [
-            {
-                name: 'Kim Parrish',
-                address: '4420 Valley Street, Garnerville, NY 10923',
-                date: '07/11/2020',
-                order: '87349585892118',
-            },
-            {
-                name: 'Michele Castillo',
-                address: '637 Kyle Street, Fullerton, NE 68638',
-                date: '07/11/2020',
-                order: '58418278790810',
-            },
-            {
-                name: 'Eric Ferris',
-                address: '906 Hart Country Lane, Toccoa, GA 30577',
-                date: '07/10/2020',
-                order: '81534454080477',
-            },
-            {
-                name: 'Gloria Noble',
-                address: '2403 Edgewood Avenue, Fresno, CA 93721',
-                date: '07/09/2020',
-                order: '20452221703743',
-            },
-            {
-                name: 'Darren Daniels',
-                address: '882 Hide A Way Road, Anaktuvuk Pass, AK 99721',
-                date: '07/07/2020',
-                order: '22906126785176',
-            },
-            {
-                name: 'Ted McDonald',
-                address: '796 Bryan Avenue, Minneapolis, MN 55406',
-                date: '07/07/2020',
-                order: '87574505851064',
-            },
-        ],
-        []
-    );
+interface Reservation {
+    driverId: string;
+    driverName: string;
+    routes: string;
+    hour: string;
+    travel: string;
+    value: string;
+    extra: string;
+    service: string;
+    paymentMethods: string;
+}
 
+const Freenow: React.FC = () => {
     const columns = useMemo(
         () => [
             {
-                Header: 'User Info',
+                Header: 'Histórico de reservas',
                 columns: [
                     {
-                        Header: 'Name',
-                        accessor: 'name',
+                        Header: 'ID do motorista',
+                        accessor: 'driverId',
                         sortType: 'alphanumeric',
                     },
                     {
-                        Header: 'Address',
-                        accessor: 'address',
+                        Header: 'Motorista',
+                        accessor: 'driverName',
+                        sortType: 'alphanumeric',
+                    },
+                    {
+                        Header: 'Rota',
+                        accessor: 'routes',
+                        sortType: 'alphanumeric',
+                    },
+                    {
+                        Header: 'Hora de recolha/largada',
+                        accessor: 'hour',
+                        sortType: 'basic',
+                    },
+                    {
+                        Header: 'Viagem',
+                        accessor: 'travel',
+                        sortType: 'alphanumeric',
+                    },
+                    {
+                        Header: 'Valor',
+                        accessor: 'value',
+                        sortType: 'alphanumeric',
+                    },
+                    {
+                        Header: 'Extra',
+                        accessor: 'extra',
+                        sortType: 'alphanumeric',
+                    },
+                    {
+                        Header: 'Serviço',
+                        accessor: 'service',
+                        sortType: 'alphanumeric',
+                    },
+                    {
+                        Header: 'Métodos de pagamento',
+                        accessor: 'paymentMethods',
                         sortType: 'alphanumeric',
                     },
                 ],
-            },
-            {
-                Header: 'Order Info',
-                columns: [
-                    {
-                        Header: 'Date',
-                        accessor: 'date',
-                        sortType: 'basic',
-                    },
-                    {
-                        Header: 'Order #',
-                        accessor: 'order',
-                        sortType: 'basic',
-                    },
-                ],
-            },
+            }
         ],
         []
     );
-
-    const [value, setValue] = useState();
+    const [value, setValue] = useState<Date>();
+    const [reservations, setReservations] = useState<Reservation[]>([
+        {
+            driverId: '',
+            driverName: '',
+            routes: '',
+            hour: '',
+            travel: '',
+            value: '',
+            extra: '',
+            service: '',
+            paymentMethods: ''
+        }
+    ]);
 
     const onChange = useCallback(
         (value) => {
-            console.log(value);
+            api.get(`/freenow/reservas`, {
+                params: {
+                    dataInicio: value[0],
+                    dataFim: value[1]
+                }
+            }).then(response => {
+                const data: Reservation[] = response.data.reservationHistoryData;
+                setReservations(data);
+                console.log(value);
+            });            
+
             setValue(value);
         },
         [setValue],
@@ -127,7 +141,7 @@ const Freenow: React.FC = () => {
             </DateForm>
             <CssBaseline />
             <Styles>
-                <Table columns={columns} data={data} />
+                <Table columns={columns} data={reservations} />
             </Styles>
         </>
     );

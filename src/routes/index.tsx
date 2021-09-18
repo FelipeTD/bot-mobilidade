@@ -5,6 +5,7 @@ import Dashboard from '../pages/Dashboard';
 import Bolt from '../pages/Bolt';
 import Cartrack from '../pages/Cartrack';
 import Freenow from '../pages/Freenow';
+import FreenowGains from '../pages/FreenowGains';
 import Inosat from '../pages/Inosat';
 import Prio from '../pages/Prio';
 import Uber from '../pages/Uber';
@@ -16,7 +17,8 @@ const Routes: React.FC = () => (
         <Route path="/" exact component={Dashboard} />
         <Route path="/bolt" component={Bolt} />
         <Route path="/cartrack" component={Cartrack} />
-        <Route path="/freenow" component={Freenow} />
+        <Route path="/freenow" exact component={Freenow} />
+        <Route path="/freenow/gains" component={FreenowGains} />
         <Route path="/inosat" component={Inosat} />
         <Route path="/prio" component={Prio} />
         <Route path="/uber" component={Uber} />
