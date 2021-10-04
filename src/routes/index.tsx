@@ -11,6 +11,10 @@ import Prio from '../pages/Prio';
 import Uber from '../pages/Uber';
 import Viaverde from '../pages/Viaverde';
 import Login from '../pages/Login';
+import Motoristas from '../pages/Motoristas';
+import Aplicativos from '../pages/Aplicativos';
+import Cadastros from '../pages/Cadastros';
+import Registros from '../pages/Registros';
 
 const Routes: React.FC = () => (
     <Switch>
@@ -24,6 +28,10 @@ const Routes: React.FC = () => (
         <Route path="/uber" component={Uber} />
         <Route path="/viaverde" component={Viaverde} />
         <Route path="/login" component={Login} />
+        <Route path="/motoristas" component={Motoristas} />
+        <Route path="/aplicativos" component={Aplicativos} />
+        <Route path="/cadastros" component={Cadastros} />
+        <Route path="/registros" component={Registros} />
     </Switch>
 );
 

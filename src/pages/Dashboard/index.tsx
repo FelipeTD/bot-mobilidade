@@ -6,7 +6,7 @@ import api from '../../services/api';
 
 import logoImg from '../../assets/logo.png';
 
-import { Title, Repositories, Header, Form } from './styles';
+import { Title, Repositories, Header, Form, Menu } from './styles';
 
 interface Repository {
     id: string;
@@ -63,6 +63,21 @@ const Dashboard: React.FC = () => {
                     <button>Logout</button>
                 </Form>
             </Header>
+
+            <Menu>
+                <Link key="motoristas" to="motoristas">
+                    Motoristas
+                </Link>
+                <Link key="aplicativos" to="aplicativos">
+                    Aplicativos
+                </Link>
+                <Link key="cadastros" to="cadastros">
+                    Cadastros
+                </Link>
+                <Link key="registros" to="registros">
+                    Registros
+                </Link>
+            </Menu>
 
             <Repositories>
                 {repositories.map(repository => (

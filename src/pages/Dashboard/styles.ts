@@ -6,8 +6,27 @@ export const Title = styled.h1`
     margin-top: 10px;
 `;
 
+export const Menu = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+
+
+    a {
+        text-decoration: none;
+        text-align: center;
+        padding: 24px;
+        background: #054F77;
+        color: #FFF;
+        border-radius: 5px;
+        width: 20%;
+
+    }
+`;
+
 export const Repositories = styled.div`
-    margin-top: 80px;
+    margin-top: 40px;
     max-width: 900px;
 
     a {
