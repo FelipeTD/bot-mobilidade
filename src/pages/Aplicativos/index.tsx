@@ -91,10 +91,14 @@ const Aplicativos: React.FC = () => {
             };
 
             const response = await api.post('/aplicativo/status', request);
-            
             const responseAplicativos = response.data.aplicativos;
             setAplicativos(responseAplicativos);
-            localStorage.setItem('@BotMobilidade:aplicativos', JSON.stringify(aplicativos));
+
+            const activeResponse = await api.get('/aplicativo/ativos');
+            const responseAplicativosAtivos = activeResponse.data.aplicativos;
+
+            localStorage.setItem('@BotMobilidade:aplicativos', JSON.stringify(responseAplicativos));
+            localStorage.setItem('@BotMobilidade:aplicativosativos', JSON.stringify(responseAplicativosAtivos));
         } catch (err) {
             console.log('Erro ao adicionar aplicativo');
         }

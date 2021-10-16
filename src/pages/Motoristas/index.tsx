@@ -82,6 +82,7 @@ const Motoristas: React.FC = () => {
 
             setMotoristas([...motoristas, motorista]);
             setNewMotorista('');
+            setNewMotoristaId('');
             setInputError('');
         } catch (err) {
             setInputError('Erro ao adicionar motorista');
@@ -106,7 +107,12 @@ const Motoristas: React.FC = () => {
             
             const responseMotoristas = response.data.motoristas;
             setMotoristas(responseMotoristas);
-            localStorage.setItem('@BotMobilidade:motoristas', JSON.stringify(motoristas));
+
+            const activeResponse = await api.get('/motorista/ativos');
+            const activeDrivers = activeResponse.data.motoristas;
+
+            localStorage.setItem('@BotMobilidade:motoristasativos', JSON.stringify(activeDrivers));
+            localStorage.setItem('@BotMobilidade:motoristas', JSON.stringify(responseMotoristas));
         } catch (err) {
             console.log('Erro ao editar status do motorista');
         }
