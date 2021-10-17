@@ -1,4 +1,8 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+
+interface LineProps {
+    posicao: string;
+}
 
 export const Title = styled.h1`
     font-size: 48px;
@@ -22,58 +26,6 @@ export const Menu = styled.div`
         border-radius: 5px;
         width: 20%;
 
-    }
-`;
-
-export const Repositories = styled.div`
-    margin-top: 40px;
-    max-width: 900px;
-
-    a {
-        background: #FFF;
-        border-radius: 5px;
-        width: 100%;
-        padding: 24px;
-        display: block;
-        text-decoration: none;
-        display: flex;
-        align-items: center;
-        transition: transform 0.2s;
-
-        & + a {
-            margin-top: 16px;
-        }
-
-        &:hover {
-            transform: translateX(10px);
-        }
-
-        img {
-            width: 64px;
-            height: 64px;
-            border-radius: 50%;
-        }
-
-        div {
-            margin-left: 16px;
-            flex: 1;
-
-            strong {
-                font-size: 20px;
-                color: #3D3D4D;
-            }
-
-            p {
-                font-size: 18px;
-                color: #A8A8B3;
-                margin-top: 4px;
-            }
-        }
-
-        svg {
-            margin-left: auto;
-            color: #CBCBD6;
-        }
     }
 `;
 
@@ -101,4 +53,58 @@ export const Form = styled.form`
             color: #666;
         }
     }
+`;
+
+export const Divisor = styled.div`
+    border-top: 1px solid #000;
+    margin-top: 40px;
+`;
+
+export const SubTitle = styled.div`
+    margin-top: 40px;
+    font-size: 30px;
+`;
+
+export const Body = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 30px;
+`;
+
+export const Column = styled.div`
+    width: 100%;
+`;
+
+export const Line = styled.div<LineProps>`
+    height: 30px;
+
+    ${props =>
+        props.posicao === "right" &&
+        css`
+            text-align: right;
+        `
+    }
+
+    ${props =>
+        props.posicao === "center" &&
+        css`
+            text-align: center;
+        `
+    }
+`;
+
+export const DateForm = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    
+    section {
+        .arc_view-days-of-month .arc_view_cell .arc_view_cell_value {
+            border-radius: 50%;
+        }
+    }
+    
 `;
