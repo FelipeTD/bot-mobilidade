@@ -194,7 +194,7 @@ const Cadastros: React.FC = () => {
                     name="selectMotorista" 
                     id="selectMotoristaId" 
                     onChange={ onChangeMotorista }
-                    value={ motorista.driverId }
+                    value={ motorista?.driverId }
                 >
                     {motoristas?.map(motorista => (
                         <option 
